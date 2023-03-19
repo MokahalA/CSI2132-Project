@@ -1,6 +1,5 @@
 CREATE TABLE HotelChain(
 	chainName varchar(50),
-	centralOfficeAddress(100),
 	numHotels int,
 	email varchar(50),
 	phoneNumber varchar(15),
@@ -48,4 +47,28 @@ CREATE TABLE Employee(
 	zip varchar(10),
 	positions varchar(50),
 	PRIMARY KEY(SSN)
+);
+
+
+CREATE TABLE Address(
+	address varchar(100),
+	chainName varchar(50),
+	PRIMARY KEY(address),
+	FOREIGN KEY (chainName) REFERENCES HotelChain(chainName)
+);
+
+
+CREATE TABLE Email(
+	email varchar(50),
+	chainName varchar(50),
+	PRIMARY KEY(email),
+	FOREIGN KEY (chainName) REFERENCES HotelChain(chainName)
+);
+
+
+CREATE TABLE phoneNumber(
+	phoneNumber varchar(25),
+	chainName varchar(50),
+	PRIMARY KEY(phoneNumber),
+	FOREIGN KEY (chainName) REFERENCES HotelChain(chainName)
 );
