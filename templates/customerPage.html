@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/customerPage.css">
+    <title>eHotels Customer Page</title>
+</head>
+<body>
+    <h1>Hello! {{ username }}</h1>
+    <form class="filter-form">
+
+        <div class="form-group">
+            <label for="hotel-chain-filter">Hotel chain</label>
+            <select class="form-control" id="hotel-chain-filter" name="hotel-chain-filter">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+
+        <div class="form-group">
+            <label for="start-date-filter">Check-in date:</label>
+            <input type="date" class="form-control" id="start-date-filter" name="start-date-filter">
+          </div>
+          
+          <div class="form-group">
+            <label for="end-date-filter">Check-out date:</label>
+            <input type="date" class="form-control" id="end-date-filter" name="end-date-filter">
+          </div>
+        
+        <div class="form-group">
+          <label for="num-rooms-filter">Number of rooms:</label>
+          <select class="form-control" id="num-rooms-filter" name="num-rooms-filter">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5+</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+            <label for="star-rating-filter">Star rating:</label>
+            <div class="star-rating">
+                <input type="radio" id="rating-all" name="star-rating-filter" value="all" checked>
+                <label for="rating-all">All</label>
+                <input type="radio" id="rating-1" name="star-rating-filter" value="1">
+                <label for="rating-1">1 star</label>
+                <input type="radio" id="rating-2" name="star-rating-filter" value="2">
+                <label for="rating-2">2 stars</label>
+                <input type="radio" id="rating-3" name="star-rating-filter" value="3">
+            <label for="rating-3">3 stars</label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="price-filter">Price range:</label>
+            <input type="range" class="form-control-range" id="price-filter" name="price-filter">
+        </div>
+      </form>
+</body>
+</html>
