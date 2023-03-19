@@ -6,35 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='styles/customerPage.css')}}" />
     <title>eHotels Customer Page</title>
-    <style>
-      nav {
-          background-color: #333;
-          overflow: hidden;
-      }
-      
-      nav ul {
-          list-style-type: none;
-          margin: 0;
-          padding: 0;
-      }
-      
-      nav li {
-          float: left;
-      }
-      
-      nav li a {
-          display: block;
-          color: white;
-          text-align: center;
-          padding: 14px 16px;
-          text-decoration: none;
-      }
-      
-      nav li a:hover {
-          background-color: #111;
-      }
-  </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script src="C:\Users\Moe\Documents\GitHub\CSI2132-Project\static\js\hotelsquery.js"></script> 
+
 </head>
+<style>
+  nav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  float: left;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #111;
+}
+</style>
 <body>
   <nav>
     <ul>
@@ -57,16 +61,8 @@
           </div>
 
           <div class="form-group">
-            <label for="hotel-chain-filter">Hotel</label>
-            <select class="form-control" id="hotel-chain-filter" name="hotel-chain-filter">
-              <option value="hotel 1">hotel 1 location</option>
-              <option value="hotel 2">hotel 2 location</option>
-              <option value="hotel 3">hotel 3 location</option>
-              <option value="hotel 4">hotel 4 location</option>
-              <option value="hotel 5">hotel 5 location</option>
-              <option value="hotel 6">hotel 6 location</option>
-              <option value="hotel 7">hotel 7 location</option>
-              <option value="hotel 8">hotel 8 location</option>
+            <label for="hotel-filter">Hotel</label>
+            <select class="form-control" id="hotel-filter" name="hotel-filter">
             </select>
           </div>
 
