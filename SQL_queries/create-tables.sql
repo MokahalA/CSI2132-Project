@@ -30,10 +30,7 @@ CREATE TABLE Customer(
 	city varchar(50),
 	province varchar(20),
 	zip varchar(10),
-	dateRegistered DATE,
-	locationName varchar(50),
-	PRIMARY KEY(SSN),
-	FOREIGN KEY (locationName) REFERENCES Hotels(locationName)
+	PRIMARY KEY(SSN)
 );
 
 
