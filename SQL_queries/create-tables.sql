@@ -30,6 +30,8 @@ CREATE TABLE Customer(
 	city varchar(50),
 	province varchar(20),
 	zip varchar(10),
+	username varchar(50),
+	password varchar(50),
 	PRIMARY KEY(SSN)
 );
 
