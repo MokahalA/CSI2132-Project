@@ -30,7 +30,7 @@ def login():
             global loggedUserName
             loggedUserName = username
             conn.close()
-            return render_template('customerPage.html', username = username)
+            return redirect(url_for('loginCustomerPage', username=username))
         else:
             conn.close()
             return 'Invalid username or password'
@@ -70,7 +70,8 @@ def register():
 @app.route('/loginCustomerPage', methods=['GET', 'POST'])
 def loginCustomerPage():
     return render_template('customerPage.html')
-
+def bookAndrent():
+    return render_template('rentandbook.html')
 
 
 if __name__ == '__main__':
