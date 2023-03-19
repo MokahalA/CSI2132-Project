@@ -1,21 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/styles/index.css">
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Massively by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}" />
+		<noscript><link rel="stylesheet" href="{{url_for('static', filename='/css/noscript.css')}}" /></noscript>
+	</head>
+	<body class="is-preload">
 
-    <title>Homepage</title>
-</head>
-<body>
-    <!-- Homepage -->
-    <h1 id="title">eHotels Management System</h1>
-    <div id="routeBtns">
-        <a id="loginBtn" class="btn btn-success" href="{{ url_for('login') }}">Login</a>
-        <a id="registerBtn" class="btn btn-success" href="{{ url_for('register') }}">Register</a>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</body>
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>CSI2132 Project<br />
+						Group #10</h1>
+						
+						<ul class="actions">
+							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+				<!-- Header -->
+					<header id="header">
+						<a href="{{ url_for('login') }}" class="logo">Login</a>
+						<br><br>
+						<a href="{{ url_for('register') }}" class="logo">Register</a>
+					</header>
+
+				<!-- Nav -->
+					
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Featured Post -->
+							
+
+						<!-- Posts -->
+							
+
+						<!-- Footer -->
+					
+
+					</div>
+
+				<!-- Footer -->
+					
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+			<script src="{{url_for('static', filename='js/jquery.scrollex.min.js')}}"></script>
+			<script src="{{url_for('static', filename='js/jquery.scrolly.min.js')}}"></script>
+			<script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+			<script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+			<script src="{{url_for('static', filename='js/util.js')}}"></script>
+			<script src="{{url_for('static', filename='js/main.js')}}"></script>
+			
+		
+
+	</body>
 </html>
