@@ -64,12 +64,32 @@ def register():
 
         return redirect(url_for('login'))
     return render_template('register.html')
+def getHotels():
+    conn = sqlite3.connect('ehotels_database.db')
+    c = conn.cursor()
+    c.execute('SELECT chainName FROM HotelChain WHERE chainName IS NOT NULL;')
+    rows = c.fetchall()
+    c.close()
+    conn.close()
+    return rows
+
+def get_hotel_chains():
+    conn = sqlite3.connect('ehotels_database.db')
+    c = conn.cursor()
+    c.execute('SELECT chainName FROM HotelChain WHERE chainName IS NOT NULL;')
+    rows = c.fetchall()
+    c.close()
+    conn.close()
+    return rows
 
 
 #Route for the customer page (when they are logged in)
 @app.route('/loginCustomerPage', methods=['GET', 'POST'])
 def loginCustomerPage():
-    return render_template('customerPage.html')
+    return render_template('customerPage.html', chains=get_hotel_chains())
+
+
+
 def bookAndrent():
     return render_template('rentandbook.html')
 
