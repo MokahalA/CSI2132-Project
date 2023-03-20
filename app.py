@@ -14,29 +14,55 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Get the inputs from the HTML
-        username = request.form['username']
-        password = request.form['password']
+        if request.form['loginBtn'] == 'LoginCustomer':
+            # Get the inputs from the HTML
+            username = request.form['username']
+            password = request.form['password']
 
-        conn = sqlite3.connect('ehotels_database.db')
-        c = conn.cursor()
+            conn = sqlite3.connect('ehotels_database.db')
+            c = conn.cursor()
 
-        #SQL Select to see if the user credentials match a row in the database
-        c.execute('SELECT * FROM Customer WHERE username = ? AND password = ?', (username, password))
-        user = c.fetchone()
+            #SQL Select to see if the user credentials match a row in the database
+            c.execute('SELECT * FROM Customer WHERE username = ? AND password = ?', (username, password))
+            user = c.fetchone()
 
-        if user:
-            session['username'] = user[1]
-            global loggedUserName
-            loggedUserName = username
-            conn.close()
-            return redirect(url_for('loginCustomerPage', username=username))
-        else:
-            conn.close()
-            return 'Invalid username or password'
+            if user:
+                session['username'] = user[1]
+                global loggedUserName
+                loggedUserName = username
+                conn.close()
+                return redirect(url_for('loginCustomerPage', username=username))
+            else:
+                conn.close()
+                return 'Invalid username or password'
         
-    return render_template('login.html')
+        elif request.form['loginBtn'] == 'LoginEmployee':
+            # TODO: Need to implement username & password validation for employee here, 
+            # might need to hard-code some values in the Employee table when we do SQL insertions.
+            
+            # Get the inputs from the HTML
+            username = request.form['username']
+            password = request.form['password']
 
+            conn = sqlite3.connect('ehotels_database.db')
+            c = conn.cursor()
+
+            #SQL Select to see if the user credentials match a row in the database
+            c.execute('SELECT * FROM Employee WHERE username = ? AND password = ?', (username, password))
+            user = c.fetchone()
+
+            if user:
+                session['username'] = user[1]
+                loggedUserName = username
+                conn.close()
+                return redirect(url_for('loginEmployeePage', username=username))
+            else:
+                conn.close()
+                return 'Invalid username or password'
+        
+        else:
+            return render_template('login.html')
+    return render_template('login.html')
 
 #Route for the registration page
 @app.route('/register', methods=['GET', 'POST'])
@@ -91,6 +117,11 @@ def get_hotel_chains():
 def loginCustomerPage():
     return render_template('customerPage.html', chains=get_hotel_chains())
 
+
+#Route for the employee page (when they are logged in)
+@app.route('/loginEmployeePage', methods=['GET', 'POST'])
+def loginEmployeePage():
+    return render_template('employeePage.html')
 
 
 def bookAndrent():

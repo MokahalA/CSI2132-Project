@@ -45,6 +45,8 @@ CREATE TABLE Employee(
 	province varchar(20),
 	zip varchar(10),
 	positions varchar(50),
+	username varchar(50),
+	password varchar(50),
 	PRIMARY KEY(SSN)
 );
 
