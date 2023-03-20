@@ -73,3 +73,27 @@ CREATE TABLE phoneNumber(
 	PRIMARY KEY(phoneNumber),
 	FOREIGN KEY (chainName) REFERENCES HotelChain(chainName)
 );
+
+
+CREATE TABLE Rooms(
+	roomID int,
+	price int, 
+	hasWifi int,
+	hasCoffeMaker int,
+	hasJaccuzi int,
+	viewType varchar(50),
+	extendable int,
+	problems varchar(150),
+	PRIMARY KEY(roomID)
+);
+
+
+CREATE TABLE Bookings(
+	bookingID int,
+	bookingDate DATE,
+	roomID int,
+	SSN int,
+	PRIMARY KEY (bookingID),
+	FOREIGN KEY (roomID) REFERENCES Room(roomID),
+	FOREIGN KEY (SSN) REFERENCES Customer(SSN)
+);
