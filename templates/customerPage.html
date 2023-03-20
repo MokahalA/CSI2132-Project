@@ -7,8 +7,34 @@
     <link rel="stylesheet" href="{{url_for('static', filename='styles/customerPage.css')}}" />
     <title>eHotels Customer Page</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <script src="C:\Users\Moe\Documents\GitHub\CSI2132-Project\static\js\hotelsquery.js"></script> 
+    <script>
+      $(document).ready(function() {
+        // When the hotel chain filter is changed, update the hotel filter options
+        $('#hotel-chain-filter').change(function() {
+          var chain_name = $(this).val();
+          if (chain_name !== '') {
+            $.ajax({
+              url: '/get_hotels',
+              data: {chain_name: chain_name},
+              success: function(response) {
+                // Clear and re-populate the hotel filter dropdown with the new options
+                $('#hotel-filter').empty().append($('<option>', {value: '', text: 'Select a hotel'}));
+                $.each(response.hotels, function(index, hotel) {
+                  $('#hotel-filter').append($('<option>', {value: hotel[0], text: hotel[0]}));
+                });
+              },
+              error: function() {
+                console.log('Error getting hotel data');
+              }
+            });
+          }
+          else {
+            // Clear the hotel filter dropdown if no chain is selected
+            $('#hotel-filter').empty().append($('<option>', {value: '', text: 'Select a hotel'}));
+          }
+        });
+      });
+      </script>
 
 </head>
 <style>
@@ -63,6 +89,7 @@ nav li a:hover {
           <div class="form-group">
             <label for="hotel-filter">Hotel</label>
             <select class="form-control" id="hotel-filter" name="hotel-filter">
+              <option value="">Select a hotel</option>
             </select>
           </div>
 

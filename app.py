@@ -65,22 +65,15 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html')
 
+
 def get_hotels():
-    chain = request.args.get('chain')
-    # Connect to the database
     conn = sqlite3.connect('ehotels_database.db')
     c = conn.cursor()
-    # Construct a query to retrieve hotels for the selected chain from the database
-    query = "SELECT * FROM hotels WHERE chainName = ?"
-    c.execute(query, (chain,))
-    hotels = c.fetchall()
-    # Convert the query result to a list of dictionaries
-    hotels = [dict(hotel) for hotel in hotels]
-    # Close the database connection
+    c.execute('SELECT h.hotelName, hc.chainName FROM Hotel h INNER JOIN HotelChain hc ON h.chainID = hc.chainID;')
+    rows = c.fetchall()
     c.close()
     conn.close()
-    # Return the list of hotels as a JSON object
-    return jsonify({'hotels': hotels})
+    return rows
   
 
 def get_hotel_chains():
