@@ -91,17 +91,8 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html')
 
-
-def get_hotels():
-    conn = sqlite3.connect('ehotels_database.db')
-    c = conn.cursor()
-    c.execute('SELECT h.hotelName, hc.chainName FROM Hotel h INNER JOIN HotelChain hc ON h.chainID = hc.chainID;')
-    rows = c.fetchall()
-    c.close()
-    conn.close()
-    return rows
   
-
+# Function for obtaining a list of all the HotelChains stored in the database.
 def get_hotel_chains():
     conn = sqlite3.connect('ehotels_database.db')
     c = conn.cursor()
@@ -111,11 +102,31 @@ def get_hotel_chains():
     conn.close()
     return rows
 
+# Function for obtaining a list of Hotels associated with an input HotelChain.
+def get_hotels(chainName):
+    conn = sqlite3.connect('ehotels_database.db')
+    c = conn.cursor()
+    c.execute('SELECT Hotels.locationName FROM HotelChain INNER JOIN Hotels ON HotelChain.chainName = Hotels.chainName WHERE Hotels.chainName = ?', 
+              (chainName,))
+    rows = c.fetchall()
+    c.close()
+    conn.close()
+    return rows
 
 #Route for the customer page (when they are logged in)
 @app.route('/loginCustomerPage', methods=['GET', 'POST'])
 def loginCustomerPage():
-    return render_template('customerPage.html', chains=get_hotel_chains())
+    if request.method == 'GET' and 'hotel-chain-filter' in request.args:
+        # get the value of the 'hotel-chain-filer' parameter
+        chainName = request.args.get('hotel-chain-filter')
+
+        # create a new 'chains' list where the previously selected hotel chain is at the front of the list.
+        newChains = list(filter(lambda c: c != (chainName,), get_hotel_chains()))
+        newChains.insert(0, (chainName,))
+
+        # Render new UI with the selected hotel chain and the associated hotels
+        return render_template('customerPage.html', chains = newChains, hotels = get_hotels(chainName))
+    return render_template('customerPage.html', chains=get_hotel_chains(), hotels = get_hotels("Accor S.A."))
 
 
 #Route for the employee page (when they are logged in)
