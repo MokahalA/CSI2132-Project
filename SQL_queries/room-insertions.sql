@@ -2,34 +2,34 @@ INSERT INTO Rooms (roomID, hotelID, price, starRating, hasWifi, hasCoffeMaker, h
 VALUES
 	-- Hotel 1 Rooms
 	(1, 1, 50, 3, 1, 0, 0, 'Sea view', 1, 1, NULL),
-	(2, 1, 70, 4, 1, 1, 0, 'Mountain view', 1, 2, NULL),
-	(3, 1, 120, 4, 1, 1, 0, 'Sea view', 1, 3, NULL),
+	(2, 1, 70, 4, 1, 1, 1, 'Mountain view', 1, 2, NULL),
+	(3, 1, 120, 4, 1, 1, 1, 'Sea view', 1, 3, NULL),
 	(4, 1, 40, 2, 0, 0, 0, 'Mountain view', 0, 1, 'Noisy AC'),
 	(5, 1, 90, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
 	-- Hotel 2 Rooms
 	(6, 2, 60, 3, 1, 0, 0, 'Sea view', 1, 1, NULL),
-	(7, 2, 80, 4, 1, 1, 0, 'Mountain view', 1, 2, NULL),
+	(7, 2, 80, 4, 1, 1, 1, 'Mountain view', 1, 2, NULL),
 	(8, 2, 140, 4, 1, 1, 0, 'Sea view', 1, 3, NULL),
-	(9, 2, 50, 2, 0, 0, 0, 'Mountain view', 0, 1, 'Broken lamp'),
+	(9, 2, 50, 2, 0, 0, 1, 'Mountain view', 0, 1, 'Broken lamp'),
 	(10, 2, 100, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
 	-- Hotel 3 Rooms
 	(11, 3, 70, 3, 1, 0, 0, 'Sea view', 1, 1, NULL),
-	(12, 3, 90, 4, 1, 1, 0, 'Mountain view', 1, 2, NULL),
+	(12, 3, 90, 4, 1, 1, 1, 'Mountain view', 1, 2, NULL),
 	(13, 3, 160, 4, 1, 1, 0, 'Sea view', 1, 3, NULL),
 	(14, 3, 60, 2, 0, 0, 0, 'Mountain view', 0, 1, 'Leaky faucet'),
-	(15, 3, 120, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
+	(15, 3, 120, 3, 1, 1, 1, 'Sea view', 1, 2, NULL),
     -- Hotel 4 Rooms
 	(16, 4, 60, 3, 1, 0, 0, 'Sea view', 1, 1, NULL),
-	(17, 4, 80, 4, 1, 1, 0, 'Mountain view', 1, 2, NULL),
+	(17, 4, 80, 4, 1, 1, 1, 'Mountain view', 1, 2, NULL),
 	(18, 4, 150, 4, 1, 1, 0, 'Sea view', 1, 3, NULL),
-	(19, 4, 50, 2, 0, 0, 0, 'Mountain view', 0, 1, 'Broken lamp'),
+	(19, 4, 50, 2, 0, 0, 1, 'Mountain view', 0, 1, 'Broken lamp'),
 	(20, 4, 100, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
 	(21, 4, 250, 4, 1, 1, 1, 'Mountain view', 1, 3, NULL),
 	-- Hotel 5 Rooms
 	(22, 5, 70, 3, 1, 0, 0, 'Sea view', 1, 1, NULL),
-	(23, 5, 90, 4, 1, 1, 0, 'Mountain view', 1, 2, NULL),
+	(23, 5, 90, 4, 1, 1, 1, 'Mountain view', 1, 2, NULL),
 	(24, 5, 180, 4, 1, 1, 0, 'Sea view', 1, 3, NULL),
-	(25, 5, 40, 2, 0, 0, 0, 'Mountain view', 0, 1, 'Noisy AC'),
+	(25, 5, 40, 2, 0, 0, 1, 'Mountain view', 0, 1, 'Noisy AC'),
 	(26, 5, 120, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
 	(27, 5, 300, 4, 1, 1, 1, 'Mountain view', 1, 3, NULL),
     -- Hotel 6 Rooms (continued)
@@ -48,23 +48,23 @@ VALUES
 	(39, 7, 400, 5, 1, 1, 1, 'Sea view', 1, 3, NULL),
 	-- Hotel 8 Rooms
 	(40, 8, 70, 2, 0, 0, 0, 'Mountain view', 0, 1, 'Broken AC'),
-	(41, 8, 90, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
+	(41, 8, 90, 3, 1, 1, 1, 'Sea view', 1, 2, NULL),
 	(42, 8, 180, 4, 1, 1, 0, 'Mountain view', 1, 3, NULL),
-	(43, 8, 50, 1, 0, 0, 0, 'Mountain view', 0, 1, 'Leaky faucet'),
+	(43, 8, 50, 1, 0, 0, 1, 'Mountain view', 0, 1, 'Leaky faucet'),
 	(44, 8, 110, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
 	(45, 8, 350, 5, 1, 1, 1, 'Mountain view', 1, 3, NULL),
     -- Hotel 9 Rooms
 	(46, 9, 70, 2, 0, 0, 0, 'Mountain view', 0, 1, 'Noisy AC'),
-	(47, 9, 90, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
+	(47, 9, 90, 3, 1, 1, 1, 'Sea view', 1, 2, NULL),
 	(48, 9, 180, 4, 1, 1, 0, 'Mountain view', 1, 3, NULL),
 	(49, 9, 50, 1, 0, 0, 0, 'Mountain view', 0, 1, 'Leaky faucet'),
 	(50, 9, 110, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
 	(51, 9, 350, 5, 1, 1, 1, 'Mountain view', 1, 3, NULL),
 	-- Hotel 10 Rooms
 	(52, 10, 60, 2, 0, 0, 0, 'Mountain view', 0, 1, 'Noisy fridge'),
-	(53, 10, 80, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
+	(53, 10, 80, 3, 1, 1, 1, 'Sea view', 1, 2, NULL),
 	(54, 10, 150, 4, 1, 1, 0, 'Mountain view', 1, 3, NULL),
-	(55, 10, 40, 1, 0, 0, 0, 'Mountain view', 0, 1, 'Leaky faucet'),
+	(55, 10, 40, 1, 0, 0, 1, 'Mountain view', 0, 1, 'Leaky faucet'),
 	(56, 10, 100, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
 	(57, 10, 350, 5, 1, 1, 1, 'Mountain view', 1, 3, NULL),
 	-- Hotel 11 Rooms
@@ -83,9 +83,9 @@ VALUES
 	(69, 12, 400, 5, 1, 1, 1, 'Mountain view', 1, 3, NULL),
 	-- Hotel 13 Rooms
 	(70, 13, 60, 2, 0, 0, 0, 'Sea view', 0, 1, 'Noisy AC'),
-	(71, 13, 90, 3, 1, 1, 0, 'Mountain view', 1, 2, NULL),
+	(71, 13, 90, 3, 1, 1, 1, 'Mountain view', 1, 2, NULL),
 	(72, 13, 180, 4, 1, 1, 0, 'Sea view', 1, 3, NULL),
-	(73, 13, 50, 1, 0, 0, 0, 'Mountain view', 0, 1, 'Leaky faucet'),
+	(73, 13, 50, 1, 0, 0, 1, 'Mountain view', 0, 1, 'Leaky faucet'),
 	(74, 13, 110, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
 	(75, 13, 350, 5, 1, 1, 1, 'Mountain view', 1, 3, NULL),
 	-- Hotel 14 Rooms
@@ -109,9 +109,9 @@ VALUES
 	(91, 16, 350, 5, 1, 1, 1, 'Mountain view', 1, 3, NULL),
 	-- Hotel 17 Rooms
 	(92, 17, 60, 2, 0, 0, 0, 'Sea view', 0, 1, 'Noisy AC'),
-	(93, 17, 90, 3, 1, 1, 0, 'Mountain view', 1, 2, NULL),
+	(93, 17, 90, 3, 1, 1, 1, 'Mountain view', 1, 2, NULL),
 	(94, 17, 180, 4, 1, 1, 0, 'Sea view', 1, 3, NULL),
-	(95, 17, 50, 1, 0, 0, 0, 'Mountain view', 0, 1, 'Leaky faucet'),
+	(95, 17, 50, 1, 0, 0, 1, 'Mountain view', 0, 1, 'Leaky faucet'),
 	(96, 17, 110, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
 	(97, 17, 350, 5, 1, 1, 1, 'Mountain view', 1, 3, NULL),
     -- Hotel 18 Rooms
@@ -140,9 +140,9 @@ VALUES
     (117, 21, 80, 2, 0, 0, 0, 'Mountain view', 0, 2, NULL),
     -- Hotel 22 Rooms
     (118, 22, 470, 4, 1, 1, 0, 'Sea view', 1, 2, NULL),
-    (119, 22, 200, 3, 1, 0, 0, 'Mountain view', 1, 2, NULL),
+    (119, 22, 200, 3, 1, 0, 1, 'Mountain view', 1, 2, NULL),
     (120, 22, 150, 2, 0, 0, 0, 'Mountain view', 0, 1, NULL),
-    (121, 22, 300, 3, 1, 1, 0, 'Sea view', 1, 3, NULL),
+    (121, 22, 300, 3, 1, 1, 1, 'Sea view', 1, 3, NULL),
     (122, 22, 80, 1, 0, 0, 0, 'Mountain view', 0, 1, NULL),
     -- Hotel 23
     (123, 23, 80, 1, 0, 0, 0, 'Mountain view', 0, 1, NULL),
@@ -190,7 +190,7 @@ VALUES
     (158, 30, 453, 5, 1, 1, 1, 'Sea view', 1, 3, NULL),
     (159, 30, 342, 4, 1, 1, 0, 'Mountain view', 1, 2, NULL),
     (160, 30, 109, 2, 1, 0, 0, 'Sea view', 0, 1, NULL),
-    (161, 30, 254, 3, 1, 0, 0, 'Mountain view', 1, 2, NULL),
+    (161, 30, 254, 3, 1, 0, 1, 'Mountain view', 1, 2, NULL),
     (162, 30, 192, 2, 0, 1, 0, 'Mountain view', 0, 1, NULL),
     -- Hotel 31
     (163, 31, 395, 5, 1, 1, 0, 'Sea view', 1, 3, NULL),
@@ -212,14 +212,14 @@ VALUES
     (177, 33, 200, 3, 1, 1, 0, 'Mountain view', 0, 2, NULL),
     -- Hotel 34 Rooms
 	(178, 34, 70, 2, 0, 0, 0, 'Sea view', 0, 1, 'Dirty bedsheets'),
-	(179, 34, 90, 3, 1, 1, 0, 'Mountain view', 1, 2, NULL),
+	(179, 34, 90, 3, 1, 1, 1, 'Mountain view', 1, 2, NULL),
 	(180, 34, 180, 4, 1, 1, 0, 'Sea view', 1, 3, NULL),
-	(181, 34, 50, 1, 0, 0, 0, 'Mountain view', 0, 1, 'Leaky faucet'),
+	(181, 34, 50, 1, 0, 0, 1, 'Mountain view', 0, 1, 'Leaky faucet'),
 	(182, 34, 110, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
 	(183, 34, 350, 5, 1, 1, 1, 'Mountain view', 1, 3, NULL),
 	-- Hotel 35 Rooms
 	(184, 35, 60, 2, 0, 0, 0, 'Sea view', 0, 1, 'Noisy AC'),
-	(185, 35, 90, 3, 1, 1, 0, 'Mountain view', 1, 2, NULL),
+	(185, 35, 90, 3, 1, 1, 1, 'Mountain view', 1, 2, NULL),
 	(186, 35, 180, 4, 1, 1, 0, 'Sea view', 1, 3, NULL),
 	(187, 35, 50, 1, 0, 0, 0, 'Mountain view', 0, 1, 'Leaky faucet'),
 	(188, 35, 110, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
@@ -249,8 +249,45 @@ VALUES
     (208, 39, 400, 5, 1, 1, 1, 'Sea view', 1, 3, 'Leaking shower'),
     (209, 39, 80, 2, 0, 0, 0, 'Mountain view', 0, 1, NULL),
     -- Hotel 40
-    (210, 40, 250, 4, 1, 1, 1, 'Sea view', 0, 2, NULL),
+    (210, 40, 250, 4, 1, 1, 1, 'Sea view', 0, 1, NULL),
     (211, 40, 150, 3, 1, 0, 0, 'Mountain view', 1, 2, NULL),
-    (212, 40, 120, 3, 1, 0, 0, 'Mountain view', 0, 1, NULL),
+    (212, 40, 120, 3, 1, 0, 0, 'Mountain view', 0, 3, NULL),
     (213, 40, 450, 5, 1, 1, 1, 'Sea view', 1, 3, 'Noisy air conditioning'),
-    (214, 40, 100, 2, 0, 0, 0, 'Mountain view', 0, 1, NULL);
+    (215, 40, 330, 2, 0, 0, 0, 'Mountain view', 0, 1, NULL),
+    (216, 40, 50, 2, 0, 0, 1, 'Mountain view', 0, 1, NULL),
+    (217, 40, 80, 2, 0, 0, 1, 'Sea view', 0, 1, NULL),
+    (218, 40, 30, 2, 0, 0, 0, 'Mountain view', 0, 2, NULL),
+
+    -- Extra Rooms
+    	-- Hotel 1 Rooms
+	(219, 1, 50, 3, 0, 0, 0, 'Mountain view', 1, 1, NULL),
+	(220, 1, 30, 4, 1, 1, 1, 'Mountain view', 1, 2, NULL),
+	(221, 1, 150, 4, 1, 1, 1, 'Sea view', 1, 3, NULL),
+	(222, 1, 85, 2, 0, 0, 0, 'Mountain view', 0, 1, 'Noisy AC'),
+	(223, 1, 46, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
+	-- Hotel 2 Rooms
+	(224, 2, 30, 3, 1, 0, 0, 'Sea view', 1, 1, NULL),
+	(225, 2, 50, 4, 1, 1, 1, 'Mountain view', 1, 2, NULL),
+	(226, 2, 40, 4, 1, 1, 0, 'Mountain view', 1, 3, NULL),
+	(227, 2, 190, 2, 0, 0, 1, 'Mountain view', 0, 1, 'Broken lamp'),
+	(228, 2, 130, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
+	-- Hotel 3 Rooms
+	(229, 3, 70, 3, 1, 0, 0, 'Mountain view', 1, 1, NULL),
+	(230, 3, 90, 4, 1, 1, 1, 'Mountain view', 1, 2, NULL),
+	(231, 3, 160, 4, 1, 1, 0, 'Mountain view', 1, 3, NULL),
+	(232, 3, 60, 2, 0, 0, 0, 'Mountain view', 0, 1, 'Leaky faucet'),
+	(233, 3, 120, 3, 1, 1, 1, 'Sea view', 1, 2, NULL),
+    -- Hotel 4 Rooms
+	(234, 4, 60, 3, 1, 0, 0, 'Sea view', 1, 1, NULL),
+	(235, 4, 80, 4, 1, 1, 1, 'Mountain view', 1, 2, NULL),
+	(236, 4, 150, 4, 1, 1, 0, 'Mountain view', 1, 3, NULL),
+	(237, 4, 50, 2, 0, 0, 1, 'Mountain view', 0, 1, 'Broken lamp'),
+	(238, 4, 100, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
+	(239, 4, 250, 4, 1, 1, 1, 'Mountain view', 1, 3, NULL),
+	-- Hotel 5 Rooms
+	(240, 5, 40, 3, 1, 0, 0, 'Sea view', 1, 1, NULL),
+	(241, 5, 60, 4, 1, 1, 1, 'Mountain view', 1, 2, NULL),
+	(242, 5, 130, 4, 1, 1, 0, 'Mountain view', 1, 3, NULL),
+	(243, 5, 39, 2, 0, 0, 1, 'Mountain view', 0, 1, 'Noisy AC'),
+	(244, 5, 190, 3, 1, 1, 0, 'Sea view', 1, 2, NULL),
+	(245, 5, 340, 4, 1, 1, 1, 'Mountain view', 1, 3, NULL);

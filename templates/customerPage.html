@@ -8,6 +8,11 @@
     <title>eHotels Customer Page</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+      var form = document.getElementById("filterForm");
+      form.addEventListener("submit", function(event) {
+      event.preventDefault();
+     });
+
       $(document).ready(function() {
         // When the hotel chain filter is changed, update the hotel filter options
         $('#hotel-chain-filter').change(function() {
@@ -77,6 +82,17 @@ table {
   border-collapse: collapse;
   width: 80%;
 }
+
+button {
+  background-color: #212931;
+  border: none;
+  color: white;
+  padding: 12px 26px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+}
 </style>
 <body>
   <nav>
@@ -88,7 +104,7 @@ table {
     </ul>
   </nav>
     
-    <form class="filter-form" method="get">
+    <form id="filterForm" class="filter-form" method="get">
 
         <div class="form-group">
             <label for="hotel-chain-filter">Hotel chain</label>
@@ -103,7 +119,7 @@ table {
             <label for="hotel-filter">Hotel</label>
             <select class="form-control" id="hotel-filter" name="hotel-filter">
               {% for hotel in hotels %}
-                <option value="{{ hotel[0] }}">{{ hotel[0] }}</option>
+                <option value="{{ hotel[1] }}">{{ hotel[0] }}</option>
               {% endfor %}
             </select>
           </div>
@@ -114,8 +130,6 @@ table {
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5+</option>
           </select>
         </div>
         
@@ -127,17 +141,22 @@ table {
           <input type="number" id="max-price" name="max-price" min="30" max="1000" value="400">
         </div>
         <div class="form-group">
-          <input checked type="checkbox" id="hasWifi-filter" name="hasWifi-filter" value="hasWifi">
+          <input checked type="checkbox" id="hasWifi-filter" name="hasWifi-filter" value="1">
           <label for="hasWifi-filter"> Wifi</label><br>
-          <input type="checkbox" id="hasJacuzzi-filter" name="hasJacuzzi-filter" value="hasJacuzzi">
+          <input type="checkbox" id="hasJacuzzi-filter" name="hasJacuzzi-filter" value="1">
           <label for="hasJacuzzi-filter"> Jacuzzi</label><br>
-          <input checked type="checkbox" id="seaView-filter" name="seaView-filter" value="seaView">
-          <label for="seaView-filter"> Sea View</label><br>
-          <input type="checkbox" id="mountainView-filter" name="mountainView-filter" value="mountainView">
-          <label for="mountainView-filter"> Mountain View</label><br>
 
         </div>
 
+        <div class="form-group">
+          <label for="viewType-filter">View type:</label>
+          <select class="form-control" id="viewType-filter" name="viewType-filter" value="Sea view" >
+            <option value="Sea view">Sea view</option>
+            <option value="Mountain view">Mountain view</option>
+          </select>
+        </div>
+
+        <!--
         <div class="form-group">
           <label for="start-date-filter">Check-in date:</label>
           <input type="date" class="form-control" id="start-date-filter" name="start-date-filter">
@@ -146,6 +165,11 @@ table {
         <div class="form-group">
           <label for="end-date-filter">Check-out date:</label>
           <input type="date" class="form-control" id="end-date-filter" name="end-date-filter">
+        </div>
+         -->
+
+        <div class="form-group">
+          <button type="submit" name="getRoomsBtn" value="getRooms">Submit</button>
         </div>
       </form>
 

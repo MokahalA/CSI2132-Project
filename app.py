@@ -106,7 +106,7 @@ def get_hotel_chains():
 def get_hotels(chainName):
     conn = sqlite3.connect('ehotels_database.db')
     c = conn.cursor()
-    c.execute('SELECT Hotels.locationName FROM HotelChain INNER JOIN Hotels ON HotelChain.chainName = Hotels.chainName WHERE Hotels.chainName = ?', 
+    c.execute('SELECT Hotels.locationName, Hotels.hotelID FROM HotelChain INNER JOIN Hotels ON HotelChain.chainName = Hotels.chainName WHERE Hotels.chainName = ?', 
               (chainName,))
     rows = c.fetchall()
     c.close()
@@ -115,6 +115,14 @@ def get_hotels(chainName):
 
 # Function for obtaining a list of Rooms associated with input criteria
 def get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType):
+
+    print(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType)
+
+    if(hasWifi == None):
+        hasWifi = 0
+    if(hasJacuzzi == None):
+        hasJacuzzi = 0
+
      # Connect to the database
     conn = sqlite3.connect('ehotels_database.db')
     cur = conn.cursor()
@@ -139,7 +147,7 @@ def get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewTy
 #Route for the customer page (when they are logged in)
 @app.route('/loginCustomerPage', methods=['GET', 'POST'])
 def loginCustomerPage():
-    if request.method == 'GET' and 'hotel-chain-filter' in request.args:
+    if request.method == 'GET' and ('hotel-chain-filter' or 'hotel-filter' or 'num-rooms-filter' or 'min-price' or 'max-price' or 'hasWifi-filter' or 'hasJacuzzi-filter' or 'viewType-filter') in request.args:
         # get the value of the 'hotel-chain-filer' parameter
         chainName = request.args.get('hotel-chain-filter')
 
@@ -147,8 +155,19 @@ def loginCustomerPage():
         newChains = list(filter(lambda c: c != (chainName,), get_hotel_chains()))
         newChains.insert(0, (chainName,))
 
+        # Obtain all other filter attributes
+        hotelID = request.args.get('hotel-filter')
+        numRooms = request.args.get('num-rooms-filter')
+        minPrice = request.args.get('min-price')
+        maxPrice = request.args.get('max-price')
+        hasWifi = request.args.get('hasWifi-filter')
+        hasJacuzzi = request.args.get('hasJacuzzi-filter')
+        viewType = request.args.get('viewType-filter')
+
+        print(get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType))
+
         # Render new UI with the selected hotel chain and the associated hotels
-        return render_template('customerPage.html', chains = newChains, hotels = get_hotels(chainName))
+        return render_template('customerPage.html', chains = newChains, hotels = get_hotels(chainName), results = get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType))
     return render_template('customerPage.html', chains=get_hotel_chains(), hotels = get_hotels("Accor S.A."), results = get_rooms(1, 1, 10, 400, 1, 0, 'Sea view'))
 
 
