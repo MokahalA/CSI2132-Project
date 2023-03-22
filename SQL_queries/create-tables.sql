@@ -8,6 +8,7 @@ CREATE TABLE HotelChain(
 
 CREATE TABLE Hotels(
 	locationName varchar(50),
+	hotelID int,
 	starRating int,
 	numRooms int,
 	street varchar(50),
@@ -77,12 +78,15 @@ CREATE TABLE phoneNumber(
 
 CREATE TABLE Rooms(
 	roomID int,
+	hotelID int,
 	price int, 
+	starRating int,
 	hasWifi int,
 	hasCoffeMaker int,
 	hasJaccuzi int,
 	viewType varchar(50),
 	extendable int,
+	roomCapacity int,
 	problems varchar(150),
 	PRIMARY KEY(roomID)
 );

@@ -113,6 +113,29 @@ def get_hotels(chainName):
     conn.close()
     return rows
 
+# Function for obtaining a list of Rooms associated with input criteria
+def get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType):
+     # Connect to the database
+    conn = sqlite3.connect('ehotels_database.db')
+    cur = conn.cursor()
+
+    # Execute the SQL query
+    sql_query = '''SELECT roomID, hotelID, price, hasWifi, hasJaccuzi, roomCapacity, viewType, extendable
+    FROM Rooms
+    WHERE hotelID = ?
+    AND price BETWEEN ? AND ?
+    AND hasWifi = ?
+    AND hasJaccuzi = ?
+    AND viewType = ?
+    AND roomCapacity >= ?'''
+
+    cur.execute(sql_query, (hotelID, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType, numRooms))
+    # Fetch the results
+    rows = cur.fetchall()
+
+    conn.close()
+    return rows
+
 #Route for the customer page (when they are logged in)
 @app.route('/loginCustomerPage', methods=['GET', 'POST'])
 def loginCustomerPage():
@@ -126,7 +149,7 @@ def loginCustomerPage():
 
         # Render new UI with the selected hotel chain and the associated hotels
         return render_template('customerPage.html', chains = newChains, hotels = get_hotels(chainName))
-    return render_template('customerPage.html', chains=get_hotel_chains(), hotels = get_hotels("Accor S.A."))
+    return render_template('customerPage.html', chains=get_hotel_chains(), hotels = get_hotels("Accor S.A."), results = get_rooms(1, 1, 10, 400, 1, 0, 'Sea view'))
 
 
 #Route for the employee page (when they are logged in)

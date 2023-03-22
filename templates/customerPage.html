@@ -64,6 +64,19 @@ nav li a {
 nav li a:hover {
   background-color: #111;
 }
+
+table, th, td {
+  border: 1px solid;
+  text-align: center;
+}
+
+th{
+  height: 30px;
+}
+table {
+  border-collapse: collapse;
+  width: 80%;
+}
 </style>
 <body>
   <nav>
@@ -94,16 +107,6 @@ nav li a:hover {
               {% endfor %}
             </select>
           </div>
-
-        <div class="form-group">
-            <label for="start-date-filter">Check-in date:</label>
-            <input type="date" class="form-control" id="start-date-filter" name="start-date-filter">
-          </div>
-          
-          <div class="form-group">
-            <label for="end-date-filter">Check-out date:</label>
-            <input type="date" class="form-control" id="end-date-filter" name="end-date-filter">
-          </div>
         
         <div class="form-group">
           <label for="num-rooms-filter">Number of rooms:</label>
@@ -115,25 +118,80 @@ nav li a:hover {
             <option value="5">5+</option>
           </select>
         </div>
+        
+        <div class="form-group">
+          <label for="min-price">Minimum Price:</label>
+          <input type="number" id="min-price" name="min-price" min="10" max="100" value="10">
+        
+          <label for="max-price">Maximum Price:</label>
+          <input type="number" id="max-price" name="max-price" min="30" max="1000" value="400">
+        </div>
+        <div class="form-group">
+          <input checked type="checkbox" id="hasWifi-filter" name="hasWifi-filter" value="hasWifi">
+          <label for="hasWifi-filter"> Wifi</label><br>
+          <input type="checkbox" id="hasJacuzzi-filter" name="hasJacuzzi-filter" value="hasJacuzzi">
+          <label for="hasJacuzzi-filter"> Jacuzzi</label><br>
+          <input checked type="checkbox" id="seaView-filter" name="seaView-filter" value="seaView">
+          <label for="seaView-filter"> Sea View</label><br>
+          <input type="checkbox" id="mountainView-filter" name="mountainView-filter" value="mountainView">
+          <label for="mountainView-filter"> Mountain View</label><br>
+
+        </div>
 
         <div class="form-group">
-            <label for="star-rating-filter">Star rating:</label>
-            <div class="star-rating">
-                <input type="radio" id="rating-all" name="star-rating-filter" value="all" checked>
-                <label for="rating-all">All</label>
-                <input type="radio" id="rating-1" name="star-rating-filter" value="1">
-                <label for="rating-1">1 star</label>
-                <input type="radio" id="rating-2" name="star-rating-filter" value="2">
-                <label for="rating-2">2 stars</label>
-                <input type="radio" id="rating-3" name="star-rating-filter" value="3">
-            <label for="rating-3">3 stars</label>
-            </div>
+          <label for="start-date-filter">Check-in date:</label>
+          <input type="date" class="form-control" id="start-date-filter" name="start-date-filter">
         </div>
         
         <div class="form-group">
-            <label for="price-filter">Price range:</label>
-            <input type="range" class="form-control-range" id="price-filter" name="price-filter">
+          <label for="end-date-filter">Check-out date:</label>
+          <input type="date" class="form-control" id="end-date-filter" name="end-date-filter">
         </div>
       </form>
+
+      <!-- Search Results -->
+      <table>
+        <h3>List of available rooms</h3>
+        <br/>
+        <thead>
+            <tr>
+                <th>Room ID</th>
+                <th>Hotel</th>
+                <th>Price</th>
+                <th>Wifi</th>
+                <th>Jacuzzi</th>
+                <th>Capacity</th>
+                <th>View Type</th>
+                <th>Extendable</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+                <tr>
+                    <td>{{ result[0] }}</td>
+                    <td>{{ result[1] }}</td>
+                    <td>{{ result[2] }}</td>
+                    {% if result[3] == 1 %}
+                    <td> Yes </td>
+                    {% else %}
+                      <td> No </td>
+                    {% endif %}
+                    {% if result[4] == 1 %}
+                      <td> Yes </td>
+                    {% else %}
+                      <td> No </td>
+                    {% endif %}
+                    <td>{{ result[5] }}</td>
+                    <td>{{ result[6] }}</td>
+                    {% if result[7] == 1 %}
+                    <td> Yes </td>
+                    {% else %}
+                      <td> No </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </body>
 </html>
