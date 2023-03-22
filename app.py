@@ -176,9 +176,14 @@ def loginCustomerPage():
 def loginEmployeePage():
     return render_template('employeePage.html')
 
-
-def bookAndrent():
-    return render_template('rentandbook.html')
+def getbookingsConfirmation():
+    conn = sqlite3.connect('ehotels_database.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM Bookings WHERE bookingID IS NOT NULL;')
+    rows = c.fetchall()
+    c.close()
+    conn.close()
+    return rows
 
 
 if __name__ == '__main__':
