@@ -21,7 +21,16 @@ def login():
 
             conn = sqlite3.connect('ehotels_database.db')
             c = conn.cursor()
-
+            d = conn.cursor()
+            
+            d.execute('SELECT SSN FROM Customer WHERE username = ? AND password = ?', (username, password))
+            ssn = d.fetchone()
+            if ssn:
+                session['ssn'] = ssn[0]
+                global loggedSSN
+                loggedSSN = ssn
+                conn.close()
+                return redirect(url_for('loginCustomerPage'))
             #SQL Select to see if the user credentials match a row in the database
             c.execute('SELECT * FROM Customer WHERE username = ? AND password = ?', (username, password))
             user = c.fetchone()
@@ -98,12 +107,12 @@ def loginEmployeePage():
         bookingID = request.form['bookingID']
         roomID = request.form['roomID']
         bookingDate = request.form['bookingDate']
-        
         conn = sqlite3.connect('ehotels_database.db')
         try:
-            c = conn.cursor()
-            c.execute('INSERT INTO Bookings (bookingID, roomID, bookingDate) VALUES (?, ?, ?)',
-                (bookingID, roomID, bookingDate))
+            d = conn.cursor()
+            ssnValue = loggedSSN[0]
+            d.execute('INSERT INTO Bookings (bookingID, roomID, bookingDate, SSN) VALUES (?, ?, ?, ?)',
+                (bookingID, roomID, bookingDate, ssnValue))
             conn.commit()
             return redirect(url_for('loginEmployeePage'))
         except Exception as e:
