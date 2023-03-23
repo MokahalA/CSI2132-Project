@@ -7,9 +7,19 @@
     <title>Employee Page</title>
   </head>
   <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f2f2f2;
+    }
+
     nav {
       background-color: #212931;
       overflow: hidden;
+      border-radius: 8px;
     }
 
     nav ul {
@@ -34,19 +44,46 @@
       background-color: #111;
     }
 
-    table,
-    th,
-    td {
-      border: 1px solid;
+    .filter-form {
+      margin: 20px auto;
+      width: 50%;
+      background-color: #fffffffd;
+      padding: 20px;
       text-align: center;
+      border-radius: 8px;
     }
 
-    th {
-      height: 30px;
+    .form-group {
+      margin-bottom: 20px;
     }
-    table {
-      border-collapse: collapse;
-      width: 80%;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto 0;
+      background-color: #212931;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #111;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #333;
+      background-color: #c4c1c1;
     }
   </style>
   <body>
@@ -58,13 +95,14 @@
         <li><a href="http://127.0.0.1:5000/loginEmployeePage">Booking</a></li>
       </ul>
     </nav>
-    <h3>**List of booked hotels**</h3>
     <form id="filterForm" class="filter-form" method="get">
       <div class="form-group">
-        <label for="booking-filter">Booking</label>
+        <label for="booking-filter">Bookings</label>
         <select class="form-control" id="booking-filter" name="booking-filter">
           {% for row in rows %}
-          <option value="{{ row[0] }}">{{ row[0] }}, {{ row[1] }}, {{ row[2] }}, {{ row[3] }}</option>
+          <option value="{{ row[0] }}">
+            {{ row[0] }}, {{ row[1] }}, {{ row[2] }}, {{ row[3] }}
+          </option>
           {% endfor %}
         </select>
       </div>
