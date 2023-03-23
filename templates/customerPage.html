@@ -53,6 +53,7 @@
     nav {
       background-color: #212931;
       overflow: hidden;
+      border-radius: 8px; /* Add rounded corners */
     }
 
     nav ul {
@@ -77,13 +78,21 @@
       background-color: #111;
     }
 
-    table,
-    th,
-    td {
-      border: 1px solid;
-      text-align: center;
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
     }
 
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      padding: 8px;
+    }
+
+    td {
+      padding: 8px;
+    }
     th {
       height: 30px;
     }
@@ -94,13 +103,103 @@
 
     button {
       background-color: #212931;
-      border: none;
+      border: none; /* Remove borders */
+      color: white; /* White text */
+      padding: 12px 24px; /* Some padding */
+      text-align: center; /* Center text */
+      text-decoration: none; /* Remove underline */
+      display: inline-block; /* Make it a block element */
+      font-size: 16px; /* Set font size */
+      margin: 4px 2px; /* Add some margin */
+      cursor: pointer; /* Add cursor on hover */
+      border-radius: 8px; /* Add rounded corners */
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3); /* Add shadow */
+    }
+    button:hover {
+      background-color: #4c66af;
       color: white;
-      padding: 12px 26px;
-      text-align: center;
-      text-decoration: none;
+    }
+    .form-group select {
+      display: block;
+      width: 100%;
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .form-group select:focus {
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    label[for="min-price"] {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    label[for="max-price"] {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    input[type="checkbox"] + label {
       display: inline-block;
-      font-size: 14px;
+      position: relative;
+      padding-left: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    input[type="checkbox"] + label:before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 3px;
+      width: 17px;
+      height: 17px;
+      border-radius: 3px;
+      border: 2px solid #ccc;
+    }
+
+    input[type="checkbox"]:checked + label:before {
+      content: "\2713";
+      color: #fff;
+      background-color: #007bff;
+      text-align: center;
+      line-height: 17px;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #333;
+      background-color: #fff;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0;
+      font-weight: bold;
+      line-height: 1.2;
     }
   </style>
   <body>
