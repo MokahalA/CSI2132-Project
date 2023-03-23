@@ -94,7 +94,8 @@ CREATE TABLE Rooms(
 
 CREATE TABLE Bookings(
 	bookingID int,
-	bookingDate DATE,
+	startDate DATE,
+	endDate DATE,
 	roomID int,
 	SSN int,
 	PRIMARY KEY (bookingID),
