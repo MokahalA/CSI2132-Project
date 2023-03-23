@@ -90,11 +90,21 @@
       padding: 8px;
     }
 
+    th,
     td {
-      padding: 8px;
+      border: 1px solid;
+      text-align: center;
+      border-right: none; 
+      border-bottom: none; 
     }
-    th {
-      height: 30px;
+
+    th:last-child,
+    td:last-child {
+      border-right: 1px solid; 
+    }
+
+    tr:last-child td {
+      border-bottom: 1px solid; 
     }
     table {
       border-collapse: collapse;
@@ -103,17 +113,17 @@
 
     button {
       background-color: #212931;
-      border: none; /* Remove borders */
-      color: white; /* White text */
-      padding: 12px 24px; /* Some padding */
-      text-align: center; /* Center text */
-      text-decoration: none; /* Remove underline */
-      display: inline-block; /* Make it a block element */
-      font-size: 16px; /* Set font size */
-      margin: 4px 2px; /* Add some margin */
-      cursor: pointer; /* Add cursor on hover */
-      border-radius: 8px; /* Add rounded corners */
-      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3); /* Add shadow */
+      border: none; 
+      color: white; 
+      padding: 12px 24px; 
+      text-align: center; 
+      text-decoration: none;
+      display: inline-block; 
+      font-size: 16px; 
+      margin: 4px 2px; 
+      cursor: pointer;
+      border-radius: 8px; 
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3); 
     }
     button:hover {
       background-color: #4c66af;
@@ -301,17 +311,6 @@
         </select>
       </div>
 
-      <!--
-        <div class="form-group">
-          <label for="start-date-filter">Check-in date:</label>
-          <input type="date" class="form-control" id="start-date-filter" name="start-date-filter">
-        </div>
-        
-        <div class="form-group">
-          <label for="end-date-filter">Check-out date:</label>
-          <input type="date" class="form-control" id="end-date-filter" name="end-date-filter">
-        </div>
-         -->
 
       <div class="form-group">
         <button type="submit" name="getRoomsBtn" value="getRooms">
