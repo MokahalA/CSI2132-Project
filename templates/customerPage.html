@@ -264,34 +264,53 @@
       </tbody>
     </table>
     <div>
-      <h3>Please select the room you want by entering Check-in/Check-out dates and the Room ID</h3>
-      <div style="display: flex;">
-        <div style="margin-right: 20px;">
-          <label for="checkin">Check-in date:</label>
-          <input type="date" id="checkin" name="checkin" style="width: 150px;"> 
-        </div>
-        <div>
-          <label for="checkout">Check-out date:</label>
-          <input type="date" id="checkout" name="checkout" min="" disabled style="width: 150px;">
-        </div>
-      </div>
-      <div style="margin-top: 10px;">
-        <label for="textbox">Room ID:</label>
-        <input type="text" id="textbox" name="textbox">
-        <button id="submitButton" type="button">Book</button>
-      </div>
+      <h3>
+        Please select the room you want by entering Check-in/Check-out dates and
+        the Room ID
+      </h3>
+      <label for="checkin">Check-in date:</label>
+      <input type="date" id="checkin" name="checkin" style="width: 150px" />
+      <label for="checkout">Check-out date:</label>
+      <input
+        type="date"
+        id="checkout"
+        name="checkout"
+        min=""
+        disabled
+        style="width: 150px"
+      />
       <script>
         const checkinInput = document.getElementById("checkin");
         const checkoutInput = document.getElementById("checkout");
-        const submitButton = document.getElementById("submitButton");
-    
         checkinInput.addEventListener("input", () => {
           checkoutInput.min = checkinInput.value;
           checkoutInput.disabled = false;
         });
-    
+      </script>
+      <label for="textbox">Room ID:</label>
+      <input type="text" id="textbox" name="textbox" />
+      <br />
+      <p id="error-message" style="color: red; display: none">
+        Please fill out all required fields.
+      </p>
+      <button id="submit-button">Book</button>
+      <script>
+        const submitButton = document.getElementById("submit-button");
         submitButton.addEventListener("click", () => {
           const roomID = document.getElementById("textbox").value;
+          const checkinDate = document.getElementById("checkin").value;
+          const checkoutDate = document.getElementById("checkout").value;
+          const errorMessage = document.getElementById("error-message");
+
+          if (roomID && checkinDate && checkoutDate) {
+            console.log(`Submitting room ID: ${roomID}`);
+
+            document.getElementById("textbox").value = "";
+            errorMessage.style.display = "none";
+          } else {
+            console.log("Please fill out all required fields");
+            errorMessage.style.display = "block";
+          }
         });
       </script>
     </div>
