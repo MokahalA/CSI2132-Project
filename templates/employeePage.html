@@ -1,70 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Employee Page</title>
-</head>
-<style>
+  </head>
+  <style>
     nav {
-    background-color: #212931;
-    overflow: hidden;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav li {
-    float: left;
-  }
-  
-  nav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-  nav li a:hover {
-    background-color: #111;
-  }
-  
-  table, th, td {
-    border: 1px solid;
-    text-align: center;
-  }
-  
-  th{
-    height: 30px;
-  }
-  table {
-    border-collapse: collapse;
-    width: 80%;
-  }
+      background-color: #212931;
+      overflow: hidden;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      float: left;
+    }
+
+    nav li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    nav li a:hover {
+      background-color: #111;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid;
+      text-align: center;
+    }
+
+    th {
+      height: 30px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 80%;
+    }
   </style>
-<body>
+  <body>
     <nav>
-        <ul>
-          <li><a href="http://127.0.0.1:5000/">Home</a></li>
-          <li><a href="http://127.0.0.1:5000/login">Login</a></li>
-          <li><a href="http://127.0.0.1:5000/register">Registration</a></li>
-          <li><a href="http://127.0.0.1:5000/loginEmployeePage">Booking</a></li>
-        </ul>
-      </nav>
-      <h3>**List of booked hotels**</h3>
+      <ul>
+        <li><a href="http://127.0.0.1:5000/">Home</a></li>
+        <li><a href="http://127.0.0.1:5000/login">Login</a></li>
+        <li><a href="http://127.0.0.1:5000/register">Registration</a></li>
+        <li><a href="http://127.0.0.1:5000/loginEmployeePage">Booking</a></li>
+      </ul>
+    </nav>
+    <h3>**List of booked hotels**</h3>
+    <form id="filterForm" class="filter-form" method="get">
       <div class="form-group">
-        <label for="booking-filter">Bookings</label>
+        <label for="booking-filter">Booking</label>
         <select class="form-control" id="booking-filter" name="booking-filter">
-            {% for booking in bookings %}
-                <option value="{{ booking[0] }}">{{ booking[1] }}</option>
-            {% endfor %}
+          {% for row in rows %}
+          <option value="{{ row[0] }}">{{ row[0] }}, {{ row[1] }}, {{ row[2] }}, {{ row[3] }}</option>
+          {% endfor %}
         </select>
-    </div>
-      <button type="button">Confirm Booking</button>
-</body>
+      </div>
+    </form>
+    <button type="button">Confirm Booking</button>
+  </body>
 </html>

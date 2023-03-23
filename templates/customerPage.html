@@ -107,7 +107,6 @@
     tr:last-child td {
       border-bottom: 1px solid;
     }
-    
 
     button {
       background-color: #212931;
@@ -410,13 +409,30 @@
         const submitButton = document.getElementById("submit-button");
         submitButton.addEventListener("click", () => {
           const roomID = document.getElementById("textbox").value;
-          const checkinDate = document.getElementById("checkin").value;
-          const checkoutDate = document.getElementById("checkout").value;
+          const checkinDate = new Date(
+            document.getElementById("checkin").value
+          );
+          const checkoutDate = new Date(
+            document.getElementById("checkout").value
+          );
+          const bookingID = Date.now();
+          const bookingDate = `${checkinDate.toLocaleDateString()} - ${checkoutDate.toLocaleDateString()}`;
           const errorMessage = document.getElementById("error-message");
 
           if (roomID && checkinDate && checkoutDate) {
-            console.log(`Submitting room ID: ${roomID}`);
+            const formData = new FormData();
+            formData.append("roomID", roomID);
+            formData.append("bookingID", bookingID);
+            formData.append("bookingDate", bookingDate);
+            console.log("roomID: " + roomID);
+          
+            console.log("bookingID: " + bookingID);
+            console.log("bookingDate: " + bookingDate);
 
+            fetch("/loginEmployeePage", {
+              method: "POST",
+              body: formData,
+            });
             document.getElementById("textbox").value = "";
             errorMessage.style.display = "none";
           } else {

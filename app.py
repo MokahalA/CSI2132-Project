@@ -91,6 +91,28 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html')
 
+#Route for the employee page (when they are logged in)
+@app.route('/loginEmployeePage', methods=['GET', 'POST'])
+def loginEmployeePage():
+    if request.method == 'POST':
+        bookingID = request.form['bookingID']
+        roomID = request.form['roomID']
+        bookingDate = request.form['bookingDate']
+        
+        conn = sqlite3.connect('ehotels_database.db')
+        try:
+            c = conn.cursor()
+            c.execute('INSERT INTO Bookings (bookingID, roomID, bookingDate) VALUES (?, ?, ?)',
+                (bookingID, roomID, bookingDate))
+            conn.commit()
+            return redirect(url_for('loginEmployeePage'))
+        except Exception as e:
+            conn.rollback()
+            return "An error occurred: %s" % str(e)
+
+        finally:
+            conn.close()
+    return render_template('employeePage.html', rows=getbookingsConfirmation())
   
 # Function for obtaining a list of all the HotelChains stored in the database.
 def get_hotel_chains():
@@ -171,10 +193,7 @@ def loginCustomerPage():
     return render_template('customerPage.html', chains=get_hotel_chains(), hotels = get_hotels("Accor S.A."), results = get_rooms(1, 1, 10, 400, 1, 0, 'Sea view'))
 
 
-#Route for the employee page (when they are logged in)
-@app.route('/loginEmployeePage', methods=['GET', 'POST'])
-def loginEmployeePage():
-    return render_template('employeePage.html')
+
 
 def getbookingsConfirmation():
     conn = sqlite3.connect('ehotels_database.db')
