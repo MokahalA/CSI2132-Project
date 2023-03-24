@@ -85,6 +85,19 @@
       color: #333;
       background-color: #c4c1c1;
     }
+    .alert {
+      background-color: #1ac938;
+      border: 1px solid #04310c;
+      color: #000000;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      display: inline-block;
+      position: fixed;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   </style>
   <body>
     <nav>
@@ -107,6 +120,19 @@
         </select>
       </div>
     </form>
-    <button type="button">Confirm Booking</button>
+    <div>
+      <button onclick="displayAlert()" type="button">Confirm Booking</button>
+      <script>
+        function displayAlert() {
+          var alertBox = document.createElement("div");
+          alertBox.innerHTML = "Room booking confirmed!";
+          alertBox.classList.add("alert");
+          document.body.appendChild(alertBox);
+          setTimeout(function () {
+            alertBox.parentNode.removeChild(alertBox);
+          }, 3000);
+        }
+      </script>
+    </div>
   </body>
 </html>
