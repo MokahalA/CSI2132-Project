@@ -19,7 +19,7 @@ CREATE TABLE Hotels(
 	phoneNumber varchar(15),
 	managerSSN int,
 	chainName varchar(50),
-	PRIMARY KEY(locationName),
+	PRIMARY KEY(hotelID),
 	FOREIGN KEY (chainName) REFERENCES HotelChain(chainName)
 );
 
@@ -48,7 +48,9 @@ CREATE TABLE Employee(
 	positions varchar(50),
 	username varchar(50),
 	password varchar(50),
-	PRIMARY KEY(SSN)
+	hotelID int,
+	PRIMARY KEY(SSN),
+	FOREIGN KEY (hotelID) REFERENCES Hotels(hotelID)
 );
 
 
@@ -85,10 +87,12 @@ CREATE TABLE Rooms(
 	hasCoffeMaker int,
 	hasJaccuzi int,
 	viewType varchar(50),
+	status varchar(50),
 	extendable int,
 	roomCapacity int,
 	problems varchar(150),
-	PRIMARY KEY(roomID)
+	PRIMARY KEY(roomID),
+	FOREIGN KEY (hotelID) REFERENCES Hotels(hotelID)
 );
 
 
