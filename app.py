@@ -215,6 +215,7 @@ def getbookingsConfirmation():
 
 
 #Route for the SQL View 1 Page
+''' The view was already created in the database, SQL query is in: sqlView.sql '''
 @app.route('/sqlView1Page', methods=['GET', 'POST'])
 def sqlView1Page():
     # Connect to the database
@@ -238,20 +239,6 @@ def sqlView1Page():
         c = conn.cursor()
 
         # Retrieve the hotel name input from the form
-        hotel_name = request.form['hotel_name']
-
-        c.execute('''drop view if exists VW_RoomCapacity;''')
-        # Execute SQL query to create room capacity view
-        c.execute('''
-        CREATE VIEW VW_RoomCapacity AS 
-        SELECT 
-            Hotels.locationName, 
-            Rooms.roomID,
-            Rooms.roomCapacity
-        FROM Hotels 
-        JOIN Rooms ON Hotels.hotelID = Rooms.hotelID;
-        ''')
-
         hotel_name = request.form['hotel_name']
         
         # retrieve the room capacity data for the specified hotel from the view
