@@ -214,5 +214,63 @@ def getbookingsConfirmation():
     return rows
 
 
+#Route for the SQL View 1 Page
+@app.route('/sqlView1Page', methods=['GET', 'POST'])
+def sqlView1Page():
+    # Connect to the database
+    conn2 = sqlite3.connect('ehotels_database.db')
+
+    # Get a cursor object
+    cursor = conn2.cursor()
+
+    # Execute the query to get location names from the Hotels table
+    cursor.execute("SELECT locationName FROM Hotels")
+
+    # Fetch all the results into a list
+    locations = [row[0] for row in cursor.fetchall()]
+
+    # Close the database connection
+    conn2.close()
+    
+    if request.method == 'POST':
+        # Connect to SQLite database
+        conn = sqlite3.connect('ehotels_database.db')
+        c = conn.cursor()
+
+        # Retrieve the hotel name input from the form
+        hotel_name = request.form['hotel_name']
+
+        c.execute('''drop view if exists VW_RoomCapacity;''')
+        # Execute SQL query to create room capacity view
+        c.execute('''
+        CREATE VIEW VW_RoomCapacity AS 
+        SELECT 
+            Hotels.locationName, 
+            Rooms.roomID,
+            Rooms.roomCapacity
+        FROM Hotels 
+        JOIN Rooms ON Hotels.hotelID = Rooms.hotelID;
+        ''')
+
+        hotel_name = request.form['hotel_name']
+        
+        # retrieve the room capacity data for the specified hotel from the view
+        cursor = conn.execute('''
+        SELECT locationName, roomID, roomCapacity
+        FROM VW_RoomCapacity
+        WHERE locationName = ?
+        ''', (hotel_name,))
+        rows = cursor.fetchall()
+
+        return render_template('sqlView1Page.html', rows=rows, locations=locations)
+    else:
+        return render_template('sqlView1Page.html', locations=locations)
+    
+
+#Route for the SQL View 2 Page
+@app.route('/sqlView2Page', methods=['GET', 'POST'])
+def sqlView2Page():
+    return render_template('sqlView2Page.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
