@@ -22,7 +22,7 @@ def login():
             conn = sqlite3.connect('ehotels_database.db')
             c = conn.cursor()
             d = conn.cursor()
-            
+
             d.execute('SELECT SSN FROM Customer WHERE username = ? AND password = ?', (username, password))
             ssn = d.fetchone()
             if ssn:
@@ -55,11 +55,18 @@ def login():
 
             conn = sqlite3.connect('ehotels_database.db')
             c = conn.cursor()
-
+            d = conn.cursor()
+            d.execute('SELECT hotelID from Employee WHERE username = ? AND password = ?', (username, password))
             #SQL Select to see if the user credentials match a row in the database
             c.execute('SELECT * FROM Employee WHERE username = ? AND password = ?', (username, password))
             user = c.fetchone()
-
+            hotelID = d.fetchone()
+            if hotelID:
+                session['hotelID'] = hotelID[0]
+                global employeehotelID  
+                employeehotelID = hotelID
+                conn.close()
+                return redirect(url_for('loginEmployeePage'))
             if user:
                 session['username'] = user[1]
                 loggedUserName = username
@@ -103,6 +110,21 @@ def register():
 #Route for the employee page (when they are logged in)
 @app.route('/loginEmployeePage', methods=['GET', 'POST'])
 def loginEmployeePage():
+    if request.method == 'GET' and ('hotel-filter' or 'num-rooms-filter' or 'min-price' or 'max-price' or 'hasWifi-filter' or 'hasJacuzzi-filter' or 'viewType-filter') in request.args:
+
+        # Obtain all other filter attributes
+        hotelID = request.args.get('hotel-filter')
+        numRooms = request.args.get('num-rooms-filter')
+        minPrice = request.args.get('min-price')
+        maxPrice = request.args.get('max-price')
+        hasWifi = request.args.get('hasWifi-filter')
+        hasJacuzzi = request.args.get('hasJacuzzi-filter')
+        viewType = request.args.get('viewType-filter')
+
+        print(get_rooms_Employees(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType))
+
+        # Render new UI with the selected hotel chain and the associated hotels
+        return render_template('customerPage.html', results = get_rooms_Employees(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType))
     if request.method == 'POST':
         bookingID = request.form['bookingID']
         roomID = request.form['roomID']
@@ -121,7 +143,7 @@ def loginEmployeePage():
 
         finally:
             conn.close()
-    return render_template('employeePage.html', rows=getbookingsConfirmation())
+    return render_template('employeePage.html', rows=getbookingsConfirmation(), results = get_rooms_Employees(1, 1, 10, 400, 1, 0, 'Sea view'))
   
 # Function for obtaining a list of all the HotelChains stored in the database.
 def get_hotel_chains():
@@ -143,7 +165,37 @@ def get_hotels(chainName):
     c.close()
     conn.close()
     return rows
+# Function for obtaining a list of Rooms for the employees page
 
+def get_rooms_Employees(employeehotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType):
+    print(employeehotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType)
+
+    if(hasWifi == None):
+        hasWifi = 0
+    if(hasJacuzzi == None):
+        hasJacuzzi = 0
+
+     # Connect to the database
+    conn = sqlite3.connect('ehotels_database.db')
+    d = conn.cursor()
+    
+
+    # Execute the SQL query
+    sql_query = '''SELECT roomID, hotelID, price, hasWifi, hasJaccuzi, roomCapacity, viewType, extendable
+    FROM Rooms
+    WHERE hotelID = ?
+    AND price BETWEEN ? AND ?
+    AND hasWifi = ?
+    AND hasJaccuzi = ?
+    AND viewType = ?
+    AND roomCapacity >= ?'''
+
+    d.execute(sql_query, (employeehotelID, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType, numRooms))
+    # Fetch the results
+    rows = d.fetchall()
+    print(rows)
+    conn.close()
+    return rows
 # Function for obtaining a list of Rooms associated with input criteria
 def get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType):
 
