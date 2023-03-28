@@ -16,6 +16,35 @@
       padding: 10px;
     }
 
+    nav {
+      background-color: #212931;
+      overflow: hidden;
+      border-radius: 8px; 
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      float: left;
+    }
+
+    nav li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    nav li a:hover {
+      background-color: #111;
+    }
+
+
     table {
       border-collapse: collapse;
       width: 100%;
@@ -47,6 +76,16 @@
     }
 </style>
 <body>
+    <nav>
+        <ul>
+          <li><a href="http://127.0.0.1:5000/">Home</a></li>
+          <li><a href="http://127.0.0.1:5000/login">Login</a></li>
+          <li><a href="http://127.0.0.1:5000/register">Registration</a></li>
+          <li><a href="http://127.0.0.1:5000/loginCustomerPage">Booking</a></li>
+          <li><a href="http://127.0.0.1:5000/sqlView1Page">SQL View 1</a></li>
+          <li><a href="http://127.0.0.1:5000/sqlView2Page">SQL View 2</a></li>
+        </ul>
+    </nav>
     <h1 style="text-align: center;">Welcome to the SQL View 1 page</h1>
 
     <div style="margin-top: 50px;">
