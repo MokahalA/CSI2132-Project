@@ -188,7 +188,7 @@ def get_rooms_Employees(employeehotelID, numRooms, minPrice, maxPrice, hasWifi, 
     AND hasWifi = ?
     AND hasJaccuzi = ?
     AND viewType = ?
-    AND roomCapacity >= ?'''
+    AND roomCapacity = ?'''
 
     d.execute(sql_query, (employeehotelID, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType, numRooms))
     # Fetch the results
@@ -199,12 +199,12 @@ def get_rooms_Employees(employeehotelID, numRooms, minPrice, maxPrice, hasWifi, 
 # Function for obtaining a list of Rooms associated with input criteria
 def get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType):
 
-    print(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType)
-
     if(hasWifi == None):
         hasWifi = 0
     if(hasJacuzzi == None):
         hasJacuzzi = 0
+
+    print(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType)
 
      # Connect to the database
     conn = sqlite3.connect('ehotels_database.db')
@@ -218,7 +218,7 @@ def get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewTy
     AND hasWifi = ?
     AND hasJaccuzi = ?
     AND viewType = ?
-    AND roomCapacity >= ?'''
+    AND roomCapacity = ?'''
 
     cur.execute(sql_query, (hotelID, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType, numRooms))
     # Fetch the results
@@ -250,7 +250,7 @@ def loginCustomerPage():
         print(get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType))
 
         # Render new UI with the selected hotel chain and the associated hotels
-        return render_template('customerPage.html', chains = newChains, hotels = get_hotels(chainName), results = get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType))
+        return render_template('customerPage.html', chains = newChains, hotels = get_hotels(chainName), results = get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType), inputChain = chainName, inputCapacity = numRooms, inputMin = minPrice, inputMax = maxPrice, inputWifi = hasWifi, inputJacuzzi = hasJacuzzi, inputView = viewType)
     return render_template('customerPage.html', chains=get_hotel_chains(), hotels = get_hotels("Accor S.A."), results = get_rooms(1, 1, 10, 400, 1, 0, 'Sea view'))
 
 
