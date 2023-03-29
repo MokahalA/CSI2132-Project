@@ -272,8 +272,49 @@ def getbookingsConfirmation():
 ''' The view was already created in the database, SQL query is in: sqlView.sql '''
 @app.route('/sqlView1Page', methods=['GET', 'POST'])
 def sqlView1Page():
-    return render_template('sqlView1Page.html')
-    
+    # Connect to the database
+    conn2 = sqlite3.connect('ehotels_database.db')
+
+    # Create a cursor to execute SQL queries
+    cur = conn2.cursor()
+
+    # Execute the SQL query to retrieve all cities in the database
+    cur.execute("SELECT DISTINCT City FROM VW_AvailableRoomsPerArea ORDER BY City ASC")
+
+    # Fetch the results
+    cities = [row[0] for row in cur.fetchall()]
+
+    print(cities)
+    # Close the database connection
+    conn2.close()
+
+    if request.method == 'POST':
+        # Retrieve the selected city from the form
+        selected_city = request.form['city']
+
+        # Connect to the database
+        conn = sqlite3.connect('ehotels_database.db')
+
+        # Create a cursor to execute SQL queries
+        cur = conn.cursor()
+
+        # Execute the SQL query to retrieve the available rooms for the selected city
+        cur.execute("SELECT * FROM VW_AvailableRoomsPerArea WHERE City=?", (selected_city,))
+
+        # Fetch the results
+        results = cur.fetchall()
+
+        print(results)
+
+        # Close the database connection
+        conn.close()
+
+        # Render the template with the query results
+        return render_template('sqlView1Page.html', cities=cities, results=results)
+
+    else:
+        # Render the template with the list of cities
+        return render_template('sqlView1Page.html', cities=cities)
 
 #Route for the SQL View 2 Page
 @app.route('/sqlView2Page', methods=['GET', 'POST'])

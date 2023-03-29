@@ -44,6 +44,36 @@
       background-color: #111;
     }
 
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+      background-color: #f8f8f8;
+    }
+
+    th {
+      background-color: #f8f8f8;
+      font-weight: bold;
+      padding: 8px;
+    }
+
+    th,
+    td {
+      border: 1px solid;
+      text-align: center;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 1px solid;
+    }
+
+    tr:last-child td {
+      border-bottom: 1px solid;
+    }
+
 </style>
 <body>
     <nav>
@@ -56,8 +86,41 @@
           <li><a href="http://127.0.0.1:5000/sqlView2Page">SQL View 2</a></li>
         </ul>
       </nav>
-    <h1>This is the SQL View 1 Page</h1>
-    <h3>Nothing to see here yet!</h3>
+    <div style="margin-top: 50px;">
+      <h3> SQL View 1: The number of available rooms per area</h3>
+      <form action="/sqlView1Page" method="post">
+        <label for="city">Select a city:</label>
+        <select id="city" name="city">
+            {% for city in cities %}
+                <option value="{{ city }}">{{ city }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    {% if results %}
+      <p>There are <b>{{ results | length }}</b> available rooms in <b>{{ results[0][0] }}</b></p>
+      <table>
+          <thead>
+              <tr>
+                  <th>Area</th>
+                  <th>Hotel Chain</th>
+                  <th>Hotel</th>
+                  <th>Room ID</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for row in results %}
+                  <tr>
+                      <td>{{ row[0] }}</td>
+                      <td>{{ row[1] }}</td>
+                      <td>{{ row[2] }}</td>
+                      <td>{{ row[3] }}</td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    {% endif %}
+  </div>
     
 </body>
 </html>
