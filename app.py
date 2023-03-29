@@ -272,7 +272,13 @@ def getbookingsConfirmation():
 ''' The view was already created in the database, SQL query is in: sqlView.sql '''
 @app.route('/sqlView1Page', methods=['GET', 'POST'])
 def sqlView1Page():
-    # Connect to the database
+    return render_template('sqlView1Page.html')
+    
+
+#Route for the SQL View 2 Page
+@app.route('/sqlView2Page', methods=['GET', 'POST'])
+def sqlView2Page():
+        # Connect to the database
     conn2 = sqlite3.connect('ehotels_database.db')
 
     # Get a cursor object
@@ -303,15 +309,9 @@ def sqlView1Page():
         ''', (hotel_name,))
         rows = cursor.fetchall()
 
-        return render_template('sqlView1Page.html', rows=rows, locations=locations)
+        return render_template('sqlView2Page.html', rows=rows, locations=locations)
     else:
-        return render_template('sqlView1Page.html', locations=locations)
-    
-
-#Route for the SQL View 2 Page
-@app.route('/sqlView2Page', methods=['GET', 'POST'])
-def sqlView2Page():
-    return render_template('sqlView2Page.html')
+        return render_template('sqlView2Page.html', locations=locations)
 
 
 #Route for the user profile page

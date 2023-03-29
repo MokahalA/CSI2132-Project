@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL View 2</title>
+    <title>SQL Views</title>
 </head>
 <style>
-   body {
+    body {
       font-family: Arial, sans-serif;
       font-size: 16px;
       line-height: 1.5;
@@ -44,6 +44,36 @@
       background-color: #111;
     }
 
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+      background-color: #f8f8f8;
+    }
+
+    th {
+      background-color: #f8f8f8;
+      font-weight: bold;
+      padding: 8px;
+    }
+
+    th,
+    td {
+      border: 1px solid;
+      text-align: center;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 1px solid;
+    }
+
+    tr:last-child td {
+      border-bottom: 1px solid;
+    }
 </style>
 <body>
     <nav>
@@ -55,9 +85,41 @@
           <li><a href="http://127.0.0.1:5000/sqlView1Page">SQL View 1</a></li>
           <li><a href="http://127.0.0.1:5000/sqlView2Page">SQL View 2</a></li>
         </ul>
-      </nav>
-    <h1>This is the SQL View 2 Page</h1>
-    <h3>Nothing to see here yet!</h3>
+    </nav>
+    <h1 style="text-align: center;">Welcome to the SQL View 2 page</h1>
+
+    <div style="margin-top: 50px;">
+        <h3> SQL View 2: The capacity of all the rooms of a specific hotel</h3>
+        <form action="/sqlView2Page" method="post">
+            <label for="hotel_name">Select a hotel location name:</label>
+            <select name="hotel_name" id="hotel_name">
+                {% for location in locations %}
+                    <option value="{{ location }}">{{ location }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+        {% if rows %}
+            <p>Room capacity data for: <b>{{ rows[0][0] }}</b></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Room ID</th>
+                        <th>Room Capacity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+    </div>
     
 </body>
 </html>
