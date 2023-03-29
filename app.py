@@ -4,6 +4,7 @@ import sqlite3
 app = Flask(__name__, static_url_path='', )
 app.secret_key = 'mysecretkey'
 
+loggedUserName = ""
 
 # Route for the homepage
 @app.route('/')
@@ -24,16 +25,17 @@ def login():
             d = conn.cursor()
 
             d.execute('SELECT SSN FROM Customer WHERE username = ? AND password = ?', (username, password))
-            ssn = d.fetchone()
+            ssn = d.fetchone()            
             if ssn:
                 session['ssn'] = ssn[0]
                 global loggedSSN
                 loggedSSN = ssn
-                conn.close()
-                return redirect(url_for('loginCustomerPage'))
+
             #SQL Select to see if the user credentials match a row in the database
+
             c.execute('SELECT * FROM Customer WHERE username = ? AND password = ?', (username, password))
             user = c.fetchone()
+            
 
             if user:
                 session['username'] = user[1]
@@ -310,6 +312,38 @@ def sqlView1Page():
 @app.route('/sqlView2Page', methods=['GET', 'POST'])
 def sqlView2Page():
     return render_template('sqlView2Page.html')
+
+
+#Route for the user profile page
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    global loggedUserName
+    print(loggedUserName)
+    if request.method == 'POST':
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        street = request.form['street']
+        city = request.form['city']
+        province = request.form['province']
+
+        conn = sqlite3.connect('ehotels_database.db')
+    
+        cursor = conn.cursor()
+        cursor.execute('UPDATE Customer SET first_name=?, last_name=?, street=?, city=?, province=? WHERE username=?',
+                       (first_name, last_name, street, city, province, loggedUserName))
+
+        conn.commit()
+        return redirect(url_for('profile'))
+
+    else:
+        conn = sqlite3.connect('ehotels_database.db')
+
+        cursor = conn.cursor()
+        cursor.execute('SELECT first_name, last_name, street, city, province FROM Customer WHERE username=?', (loggedUserName,))
+        customer = cursor.fetchone()
+
+        return render_template('profile.html', customer=customer)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
