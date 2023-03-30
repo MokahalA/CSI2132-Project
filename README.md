@@ -4,3 +4,12 @@
 
 * To run the application:
     `python app.py`
+
+Customer:
+U - test123
+P - test
+
+
+Employee:
+U - Employee1
+P - Test
