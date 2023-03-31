@@ -112,21 +112,15 @@ def register():
 #Route for the employee page (when they are logged in)
 @app.route('/loginEmployeePage', methods=['GET', 'POST'])
 def loginEmployeePage():
-    if request.method == 'GET' and ('hotel-filter' or 'num-rooms-filter' or 'min-price' or 'max-price' or 'hasWifi-filter' or 'hasJacuzzi-filter' or 'viewType-filter') in request.args:
-
-        # Obtain all other filter attributes
-        hotelID = request.args.get('hotel-filter')
-        numRooms = request.args.get('num-rooms-filter')
-        minPrice = request.args.get('min-price')
-        maxPrice = request.args.get('max-price')
-        hasWifi = request.args.get('hasWifi-filter')
-        hasJacuzzi = request.args.get('hasJacuzzi-filter')
-        viewType = request.args.get('viewType-filter')
-
-        print(get_rooms_Employees(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType))
+    if request.method == 'GET':
+        
+        conn = sqlite3.connect('ehotels_database.db')
+        d = conn.cursor()
+        d.execute('SELECT * FROM Rooms WHERE Rooms.hotelID = ? AND Rooms.status IS NULL', employeehotelID)
+        availableRooms = d.fetchall()
 
         # Render new UI with the selected hotel chain and the associated hotels
-        return render_template('customerPage.html', results = get_rooms_Employees(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType))
+        return render_template('employeePage.html', results = availableRooms, hotelName = getHotelName(employeehotelID), rows=getbookingsConfirmation())
     if request.method == 'POST':
         bookingID = request.form['bookingID']
         roomID = request.form['roomID']
@@ -266,6 +260,16 @@ def getbookingsConfirmation():
     c.close()
     conn.close()
     return rows
+
+
+def getHotelName(hotelID):
+    conn = sqlite3.connect('ehotels_database.db')
+    c = conn.cursor()
+    c.execute('SELECT locationName FROM Hotels WHERE hotelID = ?', hotelID)
+    result = c.fetchone()
+    c.close()
+    conn.close()
+    return result[0]
 
 
 #Route for the SQL View 1 Page
