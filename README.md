@@ -5,11 +5,17 @@
 * To run the application:
     `python app.py`
 
-Customer:
-U - test123
-P - test
+### Testing credentials
+
+<u>Customer</u>
+
+Username: test123
+
+Password: test
 
 
-Employee:
-U - Employee1
-P - Test
+<u>Employee</u>
+
+Username: Employee1
+
+Password: Test
