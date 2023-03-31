@@ -7,14 +7,14 @@
 
 ### Testing credentials
 
-<u>Customer</u>
+<ins>Customer</ins>
 
 Username: test123
 
 Password: test
 
 
-<u>Employee</u>
+<ins>Employee</ins>
 
 Username: Employee1
 
