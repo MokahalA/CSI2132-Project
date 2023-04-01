@@ -251,6 +251,24 @@ def loginCustomerPage():
 
         # Render new UI with the selected hotel chain and the associated hotels
         return render_template('customerPage.html', chains = newChains, hotels = get_hotels(chainName), results = get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType), inputChain = chainName, inputCapacity = numRooms, inputMin = minPrice, inputMax = maxPrice, inputWifi = hasWifi, inputJacuzzi = hasJacuzzi, inputView = viewType)
+    if request.method == 'POST':
+        bookingID = request.form['bookingID']
+        roomID = request.form['roomID']
+        bookingDate = request.form['bookingDate']
+        conn = sqlite3.connect('ehotels_database.db')
+        try:
+            d = conn.cursor()
+            ssnValue = loggedSSN[0]
+            d.execute('INSERT INTO Bookings (bookingID, roomID, bookingDate, SSN) VALUES (?, ?, ?, ?)',
+                (bookingID, roomID, bookingDate, ssnValue))
+            conn.commit()
+            return redirect(url_for('loginCustomerPage'))
+        except Exception as e:
+            conn.rollback()
+            return "An error occurred: %s" % str(e)
+
+        finally:
+            conn.close()
     return render_template('customerPage.html', chains=get_hotel_chains(), hotels = get_hotels("Accor S.A."), results = get_rooms(1, 1, 10, 400, 1, 0, 'Sea view'))
 
 
