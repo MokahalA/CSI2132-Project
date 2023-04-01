@@ -53,31 +53,6 @@ CREATE TABLE Employee(
 	FOREIGN KEY (hotelID) REFERENCES Hotels(hotelID)
 );
 
-
-CREATE TABLE Address(
-	address varchar(100),
-	chainName varchar(50),
-	PRIMARY KEY(address),
-	FOREIGN KEY (chainName) REFERENCES HotelChain(chainName)
-);
-
-
-CREATE TABLE Email(
-	email varchar(50),
-	chainName varchar(50),
-	PRIMARY KEY(email),
-	FOREIGN KEY (chainName) REFERENCES HotelChain(chainName)
-);
-
-
-CREATE TABLE phoneNumber(
-	phoneNumber varchar(25),
-	chainName varchar(50),
-	PRIMARY KEY(phoneNumber),
-	FOREIGN KEY (chainName) REFERENCES HotelChain(chainName)
-);
-
-
 CREATE TABLE Rooms(
 	roomID int,
 	hotelID int,
