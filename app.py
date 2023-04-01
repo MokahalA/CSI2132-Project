@@ -125,16 +125,12 @@ def loginEmployeePage():
         bookingID = request.form['bookingID']
         roomID = request.form['roomID']
         bookingDate = request.form['bookingDate']
-        SSN = request.form['SSN']
+        ssnValue = request.form['SSN']
         conn = sqlite3.connect('ehotels_database.db')
         try:
             d = conn.cursor()
-            ssnValue = loggedSSN[0]
-            if(SSN != ''):
-                ssnValue = SSN
-            else:
-                d.execute('INSERT INTO Bookings (bookingID, roomID, bookingDate, SSN) VALUES (?, ?, ?, ?)',
-                    (bookingID, roomID, bookingDate, ssnValue))
+            d.execute('INSERT INTO Bookings (bookingID, roomID, bookingDate, SSN) VALUES (?, ?, ?, ?)',
+                (bookingID, roomID, bookingDate, ssnValue))
             conn.commit()
             return redirect(url_for('loginEmployeePage'))
         except Exception as e:

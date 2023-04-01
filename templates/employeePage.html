@@ -154,6 +154,14 @@
         disabled
         style="width: 150px"
       />
+      <script>
+        const checkinInput = document.getElementById("checkin");
+        const checkoutInput = document.getElementById("checkout");
+        checkinInput.addEventListener("input", () => {
+          checkoutInput.min = checkinInput.value;
+          checkoutInput.disabled = false;
+        });
+      </script>
       <label for="customerSSN">Social Security Number</label>
       <input type="text" id="customerSSN" name="customerSSN"/> 
 
@@ -165,14 +173,7 @@
       </p>
       <button id="book-button">Book</button>
     </form>
-    <script>
-      const checkinInput = document.getElementById("checkin");
-      const checkoutInput = document.getElementById("checkout");
-      checkinInput.addEventListener("input", () => {
-        checkoutInput.min = checkinInput.value;
-        checkoutInput.disabled = false;
-      });
-    </script>
+
     <script>
       const bookButton = document.getElementById("book-button");
       bookButton.addEventListener("click", () => {
@@ -194,6 +195,10 @@
           formData.append("bookingID", bookingID);
           formData.append("bookingDate", bookingDate);
           formData.append("SSN", SSN);
+          console.log("roomID: " + roomID);
+          console.log("roomID: " + SSN);
+          console.log("bookingID: " + bookingID);
+          console.log("bookingDate: " + bookingDate);
 
           fetch("/loginEmployeePage", {
             method: "POST",
