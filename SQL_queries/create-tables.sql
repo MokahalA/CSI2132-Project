@@ -102,6 +102,6 @@ CREATE TABLE Bookings(
 	roomID int,
 	SSN int,
 	PRIMARY KEY (bookingID),
-	FOREIGN KEY (roomID) REFERENCES Room(roomID),
+	FOREIGN KEY (roomID) REFERENCES Rooms(roomID),
 	FOREIGN KEY (SSN) REFERENCES Customer(SSN)
 );
