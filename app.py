@@ -112,35 +112,46 @@ def register():
 #Route for the employee page (when they are logged in)
 @app.route('/loginEmployeePage', methods=['GET', 'POST'])
 def loginEmployeePage():
-    if request.method == 'GET':
         
-        conn = sqlite3.connect('ehotels_database.db')
-        d = conn.cursor()
-        d.execute('SELECT * FROM Rooms WHERE Rooms.hotelID = ? AND Rooms.status IS NULL', employeehotelID)
-        availableRooms = d.fetchall()
+    conn = sqlite3.connect('ehotels_database.db')
+    d = conn.cursor()
+    d.execute('SELECT * FROM Rooms WHERE Rooms.hotelID = ? AND Rooms.status IS NULL', employeehotelID)
+    availableRooms = d.fetchall()
 
-        # Render new UI with the selected hotel chain and the associated hotels
-        return render_template('employeePage.html', results = availableRooms, hotelName = getHotelName(employeehotelID), rows=getbookingsConfirmation())
     if request.method == 'POST':
-        bookingID = request.form['bookingID']
-        roomID = request.form['roomID']
-        bookingDate = request.form['bookingDate']
-        ssnValue = request.form['SSN']
-        conn = sqlite3.connect('ehotels_database.db')
-        try:
-            d = conn.cursor()
-            d.execute('INSERT INTO Bookings (bookingID, roomID, bookingDate, SSN) VALUES (?, ?, ?, ?)',
-                (bookingID, roomID, bookingDate, ssnValue))
-            conn.commit()
-            return redirect(url_for('loginEmployeePage'))
-        except Exception as e:
-            conn.rollback()
-            return "An error occurred: %s" % str(e)
+        if request.form['submitBtn'] == 'book-button':
+            roomID = request.form['roomID']
+            checkinDate = request.form['checkin']
+            checkoutDate = request.form['checkout']
+            customerSSN = request.form['customerSSN']
 
-        finally:
-            conn.close()
-    return render_template('employeePage.html', rows=getbookingsConfirmation(), results = get_rooms_Employees(1, 1, 10, 400, 1, 0, 'Sea view'))
-  
+            bookingID = customerSSN  + roomID
+            bookingDate = checkinDate + " - " + checkoutDate
+
+            createBooking(bookingID, bookingDate, roomID, customerSSN)
+            return render_template('employeePage.html', results = availableRooms, hotelName = getHotelName(employeehotelID), rows=getbookingsConfirmation())
+
+    # Render new UI with the selected hotel chain and the associated hotels
+    return render_template('employeePage.html', results = availableRooms, hotelName = getHotelName(employeehotelID), rows=getbookingsConfirmation())
+
+def createBooking(bookingID, bookingDate, roomID, SSN):
+    ## Create the Booking row
+    conn = sqlite3.connect('ehotels_database.db')
+    c = conn.cursor()
+    c.execute('INSERT INTO Bookings (bookingID, bookingDate, roomID, SSN) VALUES (?, ?, ?, ?)',
+                  (bookingID, bookingDate, roomID, SSN))
+    c.close()
+
+    ## Set the Room status to "Booked"
+    d = conn.cursor()
+    d.execute('UPDATE Rooms SET status = "Booked" WHERE roomID=?', (roomID,))
+
+    conn.commit()
+    conn.close()
+    print((bookingID, bookingDate, roomID, SSN))
+
+
+
 # Function for obtaining a list of all the HotelChains stored in the database.
 def get_hotel_chains():
     conn = sqlite3.connect('ehotels_database.db')
