@@ -188,7 +188,7 @@
         const bookingDate = `${checkinDate.toLocaleDateString()} - ${checkoutDate.toLocaleDateString()}`;
         const errorMessage = document.getElementById("error-message");
 
-        if (roomID && checkinDate && checkoutDate) {
+        if (roomID && checkinDate && checkoutDate && SSN) {
           const formData = new FormData();
           formData.append("roomID", roomID);
           formData.append("bookingID", bookingID);
