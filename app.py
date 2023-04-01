@@ -137,7 +137,7 @@ def loginEmployeePage():
             ssnValue = loggedSSN[0]
             d.execute('INSERT INTO Bookings (bookingID, roomID, bookingDate, SSN) VALUES (?, ?, ?, ?)',
                 (bookingID, roomID, bookingDate, ssnValue))
-            d.execute('UPDATE rooms SET status = "Booked" WHERE roomID = ?', (roomID,))
+            #d.execute('UPDATE rooms SET status = "Booked" WHERE roomID = ?', (roomID,))
             conn.commit()
             return redirect(url_for('loginEmployeePage'))
         except Exception as e:
