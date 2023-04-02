@@ -381,6 +381,7 @@
         {% endfor %}
       </tbody>
     </table>
+    
     <div>
       <h3>
         Please select the room you want by entering Check-in/Check-out dates and
@@ -448,6 +449,27 @@
           }
         });
       </script>
+    <br />
+    <h3>Previously Booked Rooms</h3>
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th>Room ID</th>
+          <th>Booking ID</th>
+          <th>Booking Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+        <tr>
+          <td>{{ booking[0] }}</td>
+          <td>{{ booking[1] }}</td>
+          <td>{{ booking[2] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
     </div>
   </body>
 </html>

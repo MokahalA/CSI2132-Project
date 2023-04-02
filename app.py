@@ -234,6 +234,27 @@ def get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewTy
     conn.close()
     return rows
 
+
+
+def get_bookings(username):
+    # Connect to the database
+    conn = sqlite3.connect('ehotels_database.db')
+    cur = conn.cursor()
+
+    cur.execute('''SELECT SSN FROM Customer WHERE username = ?''', (username,))
+    ssn = cur.fetchone()[0]
+
+    sql_query = '''SELECT bookingID, bookingDate, roomID 
+                   FROM Bookings
+                   WHERE SSN = ?'''
+    cur.execute(sql_query, (ssn,))
+
+    rows = cur.fetchall()
+
+    conn.close()
+
+    return [(row[2], row[0], row[1]) for row in rows]
+
 #Route for the customer page (when they are logged in)
 @app.route('/loginCustomerPage', methods=['GET', 'POST'])
 def loginCustomerPage():
@@ -254,10 +275,12 @@ def loginCustomerPage():
         hasJacuzzi = request.args.get('hasJacuzzi-filter')
         viewType = request.args.get('viewType-filter')
 
+        bookings = get_bookings(loggedUserName)
+
         print(get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType))
 
         # Render new UI with the selected hotel chain and the associated hotels
-        return render_template('customerPage.html', chains = newChains, hotels = get_hotels(chainName), results = get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType), inputChain = chainName, inputCapacity = numRooms, inputMin = minPrice, inputMax = maxPrice, inputWifi = hasWifi, inputJacuzzi = hasJacuzzi, inputView = viewType)
+        return render_template('customerPage.html', chains = newChains, hotels = get_hotels(chainName), results = get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType), inputChain = chainName, inputCapacity = numRooms, inputMin = minPrice, inputMax = maxPrice, inputWifi = hasWifi, inputJacuzzi = hasJacuzzi, inputView = viewType, bookings=bookings)
     if request.method == 'POST':
         bookingID = request.form['bookingID']
         roomID = request.form['roomID']
@@ -276,7 +299,8 @@ def loginCustomerPage():
 
         finally:
             conn.close()
-    return render_template('customerPage.html', chains=get_hotel_chains(), hotels = get_hotels("Accor S.A."), results = get_rooms(1, 1, 10, 400, 1, 0, 'Sea view'))
+    bookings = get_bookings(loggedUserName)
+    return render_template('customerPage.html', chains=get_hotel_chains(), hotels = get_hotels("Accor S.A."), results = get_rooms(1, 1, 10, 400, 1, 0, 'Sea view'), bookings=bookings)
 
 
 
