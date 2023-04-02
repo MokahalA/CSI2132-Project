@@ -115,7 +115,7 @@ def loginEmployeePage():
         
     conn = sqlite3.connect('ehotels_database.db')
     d = conn.cursor()
-    d.execute('SELECT * FROM Rooms WHERE Rooms.hotelID = ? AND Rooms.status IS NULL', employeehotelID)
+    d.execute('SELECT * FROM Rooms WHERE Rooms.hotelID = ? AND Rooms.status IS "Available"', employeehotelID)
     availableRooms = d.fetchall()
 
     if request.method == 'POST':
