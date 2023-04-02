@@ -204,14 +204,14 @@ def get_rooms_Employees(employeehotelID, numRooms, minPrice, maxPrice, hasWifi, 
     conn.close()
     return rows
 # Function for obtaining a list of Rooms associated with input criteria
-def get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType):
+def get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType, status):
 
     if(hasWifi == None):
         hasWifi = 0
     if(hasJacuzzi == None):
         hasJacuzzi = 0
 
-    print(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType)
+    #print(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType)
 
      # Connect to the database
     conn = sqlite3.connect('ehotels_database.db')
@@ -225,9 +225,10 @@ def get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewTy
     AND hasWifi = ?
     AND hasJaccuzi = ?
     AND viewType = ?
-    AND roomCapacity = ?'''
+    AND roomCapacity = ?
+    AND status = ?'''
 
-    cur.execute(sql_query, (hotelID, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType, numRooms))
+    cur.execute(sql_query, (hotelID, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType, numRooms, status))
     # Fetch the results
     rows = cur.fetchall()
 
@@ -277,10 +278,10 @@ def loginCustomerPage():
 
         bookings = get_bookings(loggedUserName)
 
-        print(get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType))
+        print(get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType, "Available"))
 
         # Render new UI with the selected hotel chain and the associated hotels
-        return render_template('customerPage.html', chains = newChains, hotels = get_hotels(chainName), results = get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType), inputChain = chainName, inputCapacity = numRooms, inputMin = minPrice, inputMax = maxPrice, inputWifi = hasWifi, inputJacuzzi = hasJacuzzi, inputView = viewType, bookings=bookings)
+        return render_template('customerPage.html', chains = newChains, hotels = get_hotels(chainName), results = get_rooms(hotelID, numRooms, minPrice, maxPrice, hasWifi, hasJacuzzi, viewType, "Available"), inputChain = chainName, inputCapacity = numRooms, inputMin = minPrice, inputMax = maxPrice, inputWifi = hasWifi, inputJacuzzi = hasJacuzzi, inputView = viewType, bookings=bookings)
     if request.method == 'POST':
         bookingID = request.form['bookingID']
         roomID = request.form['roomID']
@@ -300,7 +301,7 @@ def loginCustomerPage():
         finally:
             conn.close()
     bookings = get_bookings(loggedUserName)
-    return render_template('customerPage.html', chains=get_hotel_chains(), hotels = get_hotels("Accor S.A."), results = get_rooms(1, 1, 10, 400, 1, 0, 'Sea view'), bookings=bookings)
+    return render_template('customerPage.html', chains=get_hotel_chains(), hotels = get_hotels("Accor S.A."), results = get_rooms(1, 1, 10, 400, 1, 0, 'Sea view', "Available"), bookings=bookings)
 
 
 
