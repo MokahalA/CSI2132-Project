@@ -1,4 +1,13 @@
-## CSI 2132 - eHotels Project
+# CSI 2132 - eHotels Project 
+
+### Contributors
+
+Ahmad El Mokahal - 300059298
+
+Humza Faisal – 300042664
+
+Mohammad Osama – 8770948
+
 * To install the required packages:
     `pip install -r requirements.txt`
 
