@@ -8,6 +8,8 @@ Humza Faisal – 300042664
 
 Mohammad Osama – 8770948
 
+### Steps to run our application
+
 * To install the required packages:
     `pip install -r requirements.txt`
 
